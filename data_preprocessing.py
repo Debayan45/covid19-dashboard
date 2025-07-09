@@ -1,5 +1,4 @@
 # data_preprocessing.py
-from turtle import st
 import pandas as pd
 
 @st.cache_data
