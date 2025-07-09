@@ -19,11 +19,18 @@ country = st.sidebar.selectbox("Select a country", sorted(df['location'].unique(
 country_df = df[df['location'] == country]
 
 # Summary metrics
+# Summary metrics
 latest = country_df.sort_values('date').iloc[-1]
+
+total_cases = int(latest['total_cases']) if pd.notna(latest['total_cases']) else 0
+total_deaths = int(latest['total_deaths']) if pd.notna(latest['total_deaths']) else 0
+total_vacc = int(latest['total_vaccinations']) if pd.notna(latest['total_vaccinations']) else 0
+
 col1, col2, col3 = st.columns(3)
-col1.metric("Total Cases", f"{int(latest['total_cases']):,}")
-col2.metric("Total Deaths", f"{int(latest['total_deaths']):,}")
-col3.metric("Total Vaccinations", f"{int(latest.get('total_vaccinations', 0)):,}")
+col1.metric("Total Cases", f"{total_cases:,}")
+col2.metric("Total Deaths", f"{total_deaths:,}")
+col3.metric("Total Vaccinations", f"{total_vacc:,}")
+
 
 # Chart: Cases over time
 cases_chart = alt.Chart(country_df).mark_line().encode(
