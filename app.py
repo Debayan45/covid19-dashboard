@@ -12,12 +12,19 @@ df = load_data()
 # Title
 st.title("🌍 COVID-19 Global Impact Dashboard")
 
-# Sidebar - Country selector
-# Sidebar - Country search
+# Sidebar - Searchable Country Dropdown
+st.sidebar.subheader("🌍 Search & Select a Country")
+
 country_list = sorted(df['location'].unique())
 default_country = "India" if "India" in country_list else country_list[0]
 
-country = st.sidebar.selectbox("🔍 Search and select a country", country_list, index=country_list.index(default_country))
+# This dropdown lets users type and filter countries
+country = st.sidebar.selectbox(
+    "Type to search a country",
+    options=country_list,
+    index=country_list.index(default_country)
+)
+
 
 
 
