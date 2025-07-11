@@ -13,7 +13,13 @@ df = load_data()
 st.title("🌍 COVID-19 Global Impact Dashboard")
 
 # Sidebar - Country selector
-country = st.sidebar.selectbox("Select a country", sorted(df['location'].unique()))
+# Sidebar - Country search
+country_list = sorted(df['location'].unique())
+default_country = "India" if "India" in country_list else country_list[0]
+
+country = st.sidebar.selectbox("🔍 Search and select a country", country_list, index=country_list.index(default_country))
+
+
 
 # Filtered data
 country_df = df[df['location'] == country]
